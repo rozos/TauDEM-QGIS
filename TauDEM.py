@@ -64,114 +64,141 @@ def autoDelineate(thresh, outlets=None):
     res = aread8_outlets(outlets)
     if res != 0:
         return "aread8_outlets failed with " + str(res)
-    #res = dropanalysis(outlets)
-    #if res != 0:
-    #    return "dropanalysis failed with " + str(res)
+    if outlets!=None: res = dropanalysis(outlets)
+    if res != 0:
+        return "dropanalysis failed with " + str(res)
     res = threshold(thresh)
     if res != 0:
         return "threshold failed with " + str(res)
-    res = streamnet()
+    res = streamnet(outlets)
     if res != 0:
         return "streamnet failed with " + str(res)
 
-    return ""
+    return "OK!"
 
 
-def argument(arg, suffix=None, ext="tif"):
+def argument(arg, suffix=None, ext="tif", basename=None):
     if suffix==None: 
         suffix=arg
-    pathdem =os.path.join(_path, _dem ) 
+    if basename==None:
+        pathdem =os.path.join(_path, _dem ) 
+    else:
+        pathdem =os.path.join(_path, basename ) 
     return " -" + arg + " " + pathdem + suffix + "."+ext
 
 
 def outletsarg(outlets):
     if outlets!=None:
         pathout =os.path.join(_path, outlets) 
-        return  " -o " + pathout
+        return  " -o " + pathout + ".shp"
     else:
         return ""
 
 
+def reportError(cmd):
+    errlogFile = os.path.join(_path, "error.log") 
+    try:
+        res = os.system(_taudem + cmd + " 1> " + errlogFile + " 2>&1")
+        f=open(errlogFile, 'a+')
+        f.write('\n\n THE PREVIOUS OUTPUT WAS PRODUCED BY THE FOLLOWING \n')
+        f.write(_taudem + cmd +'\n')
+    except Exception as e:
+        res = str(e)
+    return res
+
+
 def pitremove():
-    cmd = "/pitremove" + argument("z", "") + argument("fel")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    cmd = "pitremove" + argument("z", "") + argument("fel")
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def d8flowdir():
-    cmd=  "/d8flowdir" + argument("fel") + argument("p") + argument("sd8")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    cmd=  "d8flowdir" + argument("fel") + argument("p") + argument("sd8")
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def dinfflowdir():
-    cmd= "/dinfflowdir" + argument("fel") + argument("ang") + argument("slp")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    cmd= "dinfflowdir" + argument("fel") + argument("ang") + argument("slp")
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def aread8():
-    cmd = "/aread8" + argument("p") + argument("ad8")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    cmd = "aread8" + argument("p") + argument("ad8")
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def aread8_outlets(outlets):
-    cmd =  "/aread8" + outletsarg(outlets) + argument("p")  \
+    cmd =  "aread8" + outletsarg(outlets) + argument("p")  \
                      + argument("wg","ss") + argument("ad8", "ssa")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def areadinf():
-    cmd = "/areadinf" + argument("ang") + argument("sca")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    cmd = "areadinf" + argument("ang") + argument("sca")
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def gridnet():
-    cmd = "/gridnet" + argument("p") + argument("plen") \
+    cmd = "gridnet" + argument("p") + argument("plen") \
                      + argument("tlen") + argument("gord")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def peukerdouglas():
-    cmd = "/peukerdouglas" + argument("fel") + argument("ss")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    cmd = "peukerdouglas" + argument("fel") + argument("ss")
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def dropanalysis(outlets):
-    cmd = "/dropanalysis" + outletsarg(outlets) + argument("p") \
+    cmd = "dropanalysis" + outletsarg(outlets) + argument("p") \
                           + argument("fel") + argument("ssa") + argument("ad8")\
                           + argument("drp","drp","txt")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
 def threshold(thresh):
-    cmd = "/threshold"+argument("ssa")+argument("src")+" -thresh " +str(thresh)
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+    cmd = "threshold"+argument("ssa")+argument("src")+" -thresh " +str(thresh)
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
 
 
-def streamnet():
-    cmd = "/streamnet" + argument("fel") + argument("p") + argument("ad8") \
+def streamnet(outlets):
+    cmd = "streamnet" + argument("fel") + argument("p") + argument("ad8") \
                         + argument("src") + argument("ord") \
                         + argument("tree", "tree", "dat") \
-                        + argument("coord", "coord", "dat") \
-                        + argument("net", "net", "shp") + argument("w")
-    res = os.system(_taudem + cmd)
-    if res!=0: print(_taudem + cmd)
+                        + argument("coord", "coord", "dat")  \
+                        + outletsarg(outlets) \
+                        + argument("net", "", "shp","River") + argument("w")
+    res = os.system(os.path.join(_taudem,cmd))
+    if res!=0:
+        res=reportError(cmd)
     return res
