@@ -1,11 +1,19 @@
+BUILD DISTRIBUTION
+------------------
+Uninstal openmpi-common (causes confilcts) and install mpich2.
+Build the files inside shape directory (run make inside shapelib).
+Build taudem (make).
+
+
+HOW THIS DISTRIBUTION WAS PREPARED
+----------------------------------
+
 Download TauDEM 5.1.2 C++ source files from http://hydrology.usu.edu/taudem/taudem5/
 
-Copy shape directory into src from TauDEM 5.2 obtained from GitHUB repository. Build the files inside this directory.
-
-Uninstal openmpi-common and install mpich2.
+Copy shape directory into src from TauDEM 5.2 obtained from GitHUB repository.
 
 Add #include <stdio.h> to linearpart.h and areadinfmn.cpp.
 
-Download and unzip shapelib into src folder. Rename the extracted folder to shape.  Build shapelib.
+Download and unzip shapelib into src folder. Rename the extracted folder to shape.
 
 Add to SHAPEFILE entry of makefile the following  shapelib/shpopen.o shapelib/safileio.o
