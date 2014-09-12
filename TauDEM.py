@@ -75,7 +75,7 @@ def autoDelineate(thresh, outlet=None):
     res = threshold(thresh)
     if res != 0:
         return "threshold failed with " + str(res)
-    if outlet!="":
+    if outlet!=None:
         res = moveoutletstostreams(outlet)
         if res != 0:
             return "moveoutletstostreams failed with " + str(res)
@@ -89,7 +89,7 @@ def autoDelineate(thresh, outlet=None):
         if res != 0:
             return "dropanalysis failed with " + str(res)
     else:
-        res = streamnet("")
+        res = streamnet()
         if res != 0:
             return "streamnet failed with " + str(res)
 
@@ -215,7 +215,7 @@ def moveoutletstostreams(outlet):
 
 
 
-def streamnet(outlet):
+def streamnet(outlet=None):
     cmd = "streamnet" + _argument("fel") + _argument("p") + _argument("ad8") \
                       + _argument("src") + _argument("ord") \
                       + _argument("tree", "tree", "dat") \
