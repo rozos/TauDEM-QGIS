@@ -72,6 +72,9 @@ def autoDelineate(thresh, outlet=None):
     res = peukerdouglas()
     if res != 0:
         return "peukerdouglas failed with " + str(res)
+    res = aread8_outlet(outlet)
+    if res != 0:
+        return "aread8_outlet failed with " + str(res)
     res = threshold(thresh)
     if res != 0:
         return "threshold failed with " + str(res)
@@ -82,9 +85,6 @@ def autoDelineate(thresh, outlet=None):
         res = streamnet("Outlet")
         if res != 0:
             return "streamnet failed with " + str(res)
-        res = aread8_outlet("Outlet")
-        if res != 0:
-            return "aread8_outlet failed with " + str(res)
         res = dropanalysis("Outlet")
         if res != 0:
             return "dropanalysis failed with " + str(res)
