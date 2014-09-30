@@ -1,11 +1,11 @@
 ABOUT
------
+=====
 This is a TauDEM source distribution based on version 5.1.2 (see http://hydrology.usu.edu/taudem/taudem5) that compiles in Linux environments (tested in Ubuntu 14.10).
 
 
 
 BUILD DISTRIBUTION
-------------------
+==================
 1. Uninstall openmpi-common (causes conflicts) and install mpich2.
 2. Build the files inside shape directory (run make inside shapelib).
 3. Build taudem (make).
@@ -13,7 +13,7 @@ BUILD DISTRIBUTION
 
 
 HOW THIS DISTRIBUTION WAS PREPARED
-----------------------------------
+==================================
 
 . Download TauDEM 5.1.2 C++ source files.
 
@@ -28,7 +28,7 @@ HOW THIS DISTRIBUTION WAS PREPARED
 
 
 TAUDEM.PY
----------
+=========
 The TauDEM.py can be used to automate delineation from the QGIS python console. 
 
 1. Add the path to the TauDEM.py (sys.path.append("pathToTauDEMpy"))
