@@ -29,7 +29,7 @@ HOW THIS DISTRIBUTION WAS PREPARED
 
 TAUDEM.PY
 =========
-The TauDEM.py can be used to automate delineation from the QGIS python console. 
+TauDEM.py can be used to automate delineation from within QGIS python console. 
 
 1. Add the path to the TauDEM.py (sys.path.append(pathToTauDEMpy))
 2. TauDEM.initialize(pathToTauDEMcommands, pathToDEM, nameOfDEM)
