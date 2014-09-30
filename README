@@ -7,8 +7,8 @@ This is a TauDEM source distribution based on version 5.1.2 (see http://hydrolog
 BUILD DISTRIBUTION
 ==================
 1. Uninstall openmpi-common (causes conflicts) and install mpich2.
-2. Build the files inside shape directory (run make inside shapelib).
-3. Build taudem (make).
+2. Build the files inside shape directory (do make inside shapelib).
+3. Build taudem (do make).
 
 
 
@@ -23,7 +23,7 @@ HOW THIS DISTRIBUTION WAS PREPARED
 
 . Download and unzip shapelib into src folder.
 
-. Add to SHAPEFILE entry of makefile shapelib/shpopen.o shapelib/safileio.o
+. Add to SHAPEFILE entry of makefile: shapelib/shpopen.o, shapelib/safileio.o
 
 
 
@@ -31,6 +31,6 @@ TAUDEM.PY
 =========
 The TauDEM.py can be used to automate delineation from the QGIS python console. 
 
-1. Add the path to the TauDEM.py (sys.path.append("pathToTauDEMpy"))
+1. Add the path to the TauDEM.py (sys.path.append(pathToTauDEMpy))
 2. TauDEM.initialize(pathToTauDEMcommands, pathToDEM, nameOfDEM)
 3. TauDEM.autoDelineate(threshold, outlets)
