@@ -153,20 +153,20 @@ def dinfflowdir():
 
 
 def aread8():
-    cmd = "aread8" + _argument("p") + _argument("ad8")
+    cmd = "aread8" + _argument("p") + _argument("ad8") + " -nc"
     return _execute(cmd)
 
 
 
 def aread8_outlet(outlet):
     cmd =  "aread8" + _outletarg(outlet) + _argument("p")  \
-                     + _argument("wg","ss") + _argument("ad8", "ssa")
+                     + _argument("wg","ss") + _argument("ad8", "ssa") + " -nc"
     return _execute(cmd)
 
 
 
 def areadinf():
-    cmd = "areadinf" + _argument("ang") + _argument("sca")
+    cmd = "areadinf" + _argument("ang") + _argument("sca") + " -nc"
     return _execute(cmd)
 
 
