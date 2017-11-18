@@ -34,3 +34,12 @@ TauDEM.py can be used to automate delineation from within QGIS python console.
 1. Add the path to the TauDEM.py (sys.path.append(pathToTauDEMpy))
 2. TauDEM.initialize(pathToTauDEMcommands, pathToDEM, nameOfDEM)
 3. TauDEM.autoDelineate(threshold, outlets)
+
+EXAMPLE
+
+import sys
+pathToTauDEMpy="c:/Users/vrozos/Programs/TauDem"
+sys.path.append(pathToTauDEMpy)
+import TauDEM
+TauDEM.initialize(pathToTauDEMpy, "c:/Users/vrozos/Downloads/Bulk-Data/Mandra", "DTM_float")
+TauDEM.autoDelineate(50)  
