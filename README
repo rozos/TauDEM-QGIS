@@ -7,7 +7,7 @@ This is a TauDEM source distribution based on version 5.1.2 (see http://hydrolog
 BUILD DISTRIBUTION
 ==================
 1. Install mpich2 (package libmpich-dev)*.
-2. Build the files inside shape directory (do make inside shapelib).
+2. Build the files inside shape directory (do make inside directory shape).
 3. Build taudem (do make).
 
 * If openmpi-common is installed it should be uninstalled (it causes conflicts).
